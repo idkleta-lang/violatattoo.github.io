@@ -1,22 +1,15 @@
 <!doctype html>
-<html lang="en" translate="no">
+<html lang="it" translate="no">
 <head>
 <meta charset="utf-8">
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Viola — Tattoo & Art</title>
 <style>
-:root{
-  --ease:cubic-bezier(.2,.8,.2,1);
-}
+:root{--ease:cubic-bezier(.2,.8,.2,1)}
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;background:#050505}
-body{
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-  font-family:Georgia,"Times New Roman",serif;
-}
+body{overflow:hidden;display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif}
 .stage{
   position:relative;
   width:min(100vw,calc(100svh * 4 / 3));
@@ -24,190 +17,148 @@ body{
   background:#050505;
   overflow:hidden;
   perspective:1800px;
-  transition:transform 1.15s var(--ease),filter 1.15s var(--ease);
+  transition:transform 1.15s var(--ease),filter 1.15s var(--ease)
 }
 .portal{
-  position:absolute;
-  top:15.2%;
-  width:26.25%;
-  height:62.6%;
-  overflow:hidden;
-  border-radius:50% 50% 0 0 / 22% 22% 0 0;
-  z-index:1;
-  background:#080808;
+  position:absolute;top:15.2%;width:26.25%;height:62.6%;
+  overflow:hidden;border-radius:50% 50% 0 0 / 22% 22% 0 0;
+  z-index:1;background:#080808;background-size:cover;background-position:center;
+  transform:scale(1.02);transition:transform 1.2s var(--ease),filter .7s ease
 }
 .portal.tattoo{left:15.2%;background-image:url("tattoo-room.webp")}
 .portal.art{left:58.6%;background-image:url("art-room.webp")}
-.portal{
-  background-size:cover;
-  background-position:center;
-  transform:scale(1.02);
-  transition:transform 1.2s var(--ease),filter .7s ease;
-}
-.portal::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom,rgba(0,0,0,.14),rgba(0,0,0,.04) 55%,rgba(0,0,0,.18));
-  pointer-events:none;
-}
-.frame{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:fill;
-  z-index:3;
-  pointer-events:none;
-}
+.portal::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.14),rgba(0,0,0,.04) 55%,rgba(0,0,0,.18));pointer-events:none}
+.frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:3;pointer-events:none}
+
 .door-link{
-  position:absolute;
-  top:15.2%;
-  width:26.25%;
-  height:62.6%;
-  z-index:4;
-  display:block;
-  outline:none;
-  perspective:1500px;
-  -webkit-tap-highlight-color:transparent;
+  position:absolute;top:15.2%;width:26.25%;height:62.6%;z-index:4;
+  display:block;outline:none;perspective:1500px;-webkit-tap-highlight-color:transparent
 }
 .door-link.tattoo{left:15.2%}
 .door-link.art{left:58.6%}
 .door{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:fill;
-  transform-origin:100% 50%;
-  transform-style:preserve-3d;
-  backface-visibility:hidden;
-  transition:
-    transform .95s var(--ease),
-    filter .45s ease,
-    opacity .7s ease;
-  filter:drop-shadow(0 18px 22px rgba(0,0,0,.42));
-  will-change:transform;
-}
-.door-link::after{
-  content:"";
-  position:absolute;
-  inset:0;
+  width:100%;height:100%;display:block;object-fit:fill;
+  /* Clips the original image background/halo to the arched door itself */
   border-radius:50% 50% 0 0 / 22% 22% 0 0;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
-  pointer-events:none;
-  transition:box-shadow .35s ease;
+  transform-origin:100% 50%;transform-style:preserve-3d;backface-visibility:hidden;
+  transition:transform .95s var(--ease),filter .45s ease,opacity .7s ease;
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.42));will-change:transform
 }
-.door-link:hover .door,
-.door-link:focus-visible .door{
-  transform:rotateY(-10deg);
-  filter:drop-shadow(18px 20px 24px rgba(0,0,0,.52));
+.door-link:hover .door,.door-link:focus-visible .door{
+  transform:rotateY(-10deg);filter:drop-shadow(18px 20px 24px rgba(0,0,0,.52))
 }
-.door-link:hover::after,
-.door-link:focus-visible::after{
-  box-shadow:inset 0 0 34px rgba(255,255,255,.08);
-}
-.door-link.art:hover .door,
-.door-link.art:focus-visible .door{
-  transform:rotateY(-11deg);
-}
-.hint{
-  position:absolute;
-  left:50%;
-  bottom:3.6%;
-  transform:translateX(-50%);
-  z-index:6;
-  color:rgba(255,255,255,.62);
-  font:10px/1.2 Arial,sans-serif;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-  pointer-events:none;
-  opacity:.78;
-  transition:opacity .35s ease;
-}
-body.opening .hint{opacity:0}
 body.opening .door-link{pointer-events:none}
-body.opening.tattoo-open .door-link.tattoo .door{
-  transform:rotateY(-78deg) translateZ(8px);
-  filter:drop-shadow(48px 24px 34px rgba(0,0,0,.72));
-}
+body.opening.tattoo-open .door-link.tattoo .door,
 body.opening.art-open .door-link.art .door{
   transform:rotateY(-78deg) translateZ(8px);
-  filter:drop-shadow(48px 24px 34px rgba(0,0,0,.72));
+  filter:drop-shadow(48px 24px 34px rgba(0,0,0,.72))
 }
 body.opening.tattoo-open .portal.tattoo,
-body.opening.art-open .portal.art{
-  transform:scale(1.08);
-}
+body.opening.art-open .portal.art{transform:scale(1.08)}
 body.opening.tattoo-open .stage{transform:scale(1.035) translateX(1.5%)}
 body.opening.art-open .stage{transform:scale(1.035) translateX(-1.5%)}
 
-/* A subtle light spill when a door opens */
 .glow{
-  position:absolute;
-  top:15.2%;
-  width:26.25%;
-  height:62.6%;
-  border-radius:50% 50% 0 0 / 22% 22% 0 0;
-  z-index:2;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .85s ease;
-  mix-blend-mode:screen;
+  position:absolute;top:15.2%;width:26.25%;height:62.6%;
+  border-radius:50% 50% 0 0 / 22% 22% 0 0;z-index:2;opacity:0;
+  pointer-events:none;transition:opacity .85s ease;mix-blend-mode:screen
 }
 .glow.tattoo{left:15.2%;box-shadow:inset 0 0 70px rgba(255,28,112,.34)}
 .glow.art{left:58.6%;box-shadow:inset 0 0 70px rgba(255,214,188,.32)}
 body.opening.tattoo-open .glow.tattoo,
 body.opening.art-open .glow.art{opacity:1}
 
-@media (prefers-reduced-motion:reduce){
-  .door,.stage,.portal,.glow{transition:none!important}
+/* Invisible click zones exactly over the baked IT / EN / RU labels */
+.lang-switch{
+  position:absolute;left:79.2%;top:6.6%;width:8.8%;height:5.2%;
+  z-index:8;display:flex;align-items:center;justify-content:space-between
 }
+.lang-switch button{
+  position:relative;width:31%;height:100%;padding:0;border:0;background:transparent;
+  color:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent
+}
+.lang-switch button::after{
+  content:"";position:absolute;left:31%;right:31%;bottom:1px;height:1px;
+  background:#fff;opacity:0;transform:scaleX(.3);transition:.2s ease
+}
+.lang-switch button.active::after{opacity:.85;transform:scaleX(1)}
+
+.hint{
+  position:absolute;left:50%;bottom:3.5%;transform:translateX(-50%);
+  z-index:7;color:rgba(255,255,255,.62);font:9px/1.2 Arial,sans-serif;
+  letter-spacing:.24em;text-transform:uppercase;white-space:nowrap;
+  pointer-events:none;transition:opacity .35s ease
+}
+body.opening .hint{opacity:0}
+
+@media (prefers-reduced-motion:reduce){.door,.stage,.portal,.glow{transition:none!important}}
 @media (max-width:700px) and (orientation:portrait){
   body{overflow:auto;min-height:100svh}
-  .stage{
-    width:100vw;
-    height:75vw;
-    min-height:310px;
-    margin:auto 0;
-  }
-  .hint{font-size:8px;bottom:2.2%;letter-spacing:.18em}
+  .stage{width:100vw;height:75vw;min-height:310px;margin:auto 0}
+  .hint{font-size:7px;bottom:2%;letter-spacing:.14em}
 }
 </style>
 </head>
 <body class="notranslate" translate="no">
-  <main class="stage" aria-label="Choose your world">
-    <div class="portal tattoo" aria-hidden="true"></div>
-    <div class="portal art" aria-hidden="true"></div>
+<main class="stage" aria-label="Choose your world">
+  <div class="portal tattoo" aria-hidden="true"></div>
+  <div class="portal art" aria-hidden="true"></div>
+  <div class="glow tattoo" aria-hidden="true"></div>
+  <div class="glow art" aria-hidden="true"></div>
 
-    <div class="glow tattoo" aria-hidden="true"></div>
-    <div class="glow art" aria-hidden="true"></div>
+  <img class="frame" src="frame-overlay.webp" alt="">
 
-    <img class="frame" src="frame-overlay.webp" alt="">
+  <a class="door-link tattoo" href="tattoo.html" aria-label="Enter Tattoo">
+    <img class="door" src="tattoo-door.webp" alt="Tattoo">
+  </a>
+  <a class="door-link art" href="art.html" aria-label="Enter Art">
+    <img class="door" src="art-door.webp" alt="Art">
+  </a>
 
-    <a class="door-link tattoo" href="tattoo.html" aria-label="Enter Tattoo">
-      <img class="door" src="tattoo-door.webp" alt="Tattoo">
-    </a>
+  <div class="lang-switch" aria-label="Language">
+    <button data-lang="it" aria-label="Italiano">IT</button>
+    <button data-lang="en" aria-label="English">EN</button>
+    <button data-lang="ru" aria-label="Русский">RU</button>
+  </div>
 
-    <a class="door-link art" href="art.html" aria-label="Enter Art">
-      <img class="door" src="art-door.webp" alt="Art">
-    </a>
-
-    <div class="hint">Tap a door</div>
-  </main>
+  <div class="hint" id="hint">TOCCA UNA PORTA</div>
+</main>
 
 <script>
+const translations={
+  it:{hint:"TOCCA UNA PORTA"},
+  en:{hint:"TAP A DOOR"},
+  ru:{hint:"НАЖМИ НА ДВЕРЬ"}
+};
+
+function setLang(lang){
+  if(!translations[lang]) lang="it";
+  localStorage.setItem("violaLang",lang);
+  document.documentElement.lang=lang;
+  document.getElementById("hint").textContent=translations[lang].hint;
+  document.querySelectorAll(".lang-switch button").forEach(b=>{
+    b.classList.toggle("active",b.dataset.lang===lang);
+  });
+}
+
+document.querySelectorAll(".lang-switch button").forEach(b=>{
+  b.addEventListener("click",e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    setLang(b.dataset.lang);
+  });
+});
+
+setLang(localStorage.getItem("violaLang") || "it");
+
 document.querySelectorAll(".door-link").forEach(link=>{
   link.addEventListener("click",e=>{
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     e.preventDefault();
     if(document.body.classList.contains("opening")) return;
-
     const isTattoo=link.classList.contains("tattoo");
-    document.body.classList.add("opening", isTattoo ? "tattoo-open" : "art-open");
-
-    window.setTimeout(()=>{
-      window.location.href=link.getAttribute("href");
-    },1050);
+    document.body.classList.add("opening",isTattoo?"tattoo-open":"art-open");
+    setTimeout(()=>{window.location.href=link.getAttribute("href")},1050);
   });
 });
 </script>
