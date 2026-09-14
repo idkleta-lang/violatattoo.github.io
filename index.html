@@ -83,6 +83,22 @@ body.opening.art-open .glow.art{opacity:1}
 }
 .lang-switch button.active::after{opacity:.85;transform:scaleX(1)}
 
+
+.tagline{
+  position:absolute;
+  left:50%;
+  top:15.7%;
+  transform:translateX(-50%);
+  z-index:7;
+  color:#f2e8da;
+  font:italic clamp(12px,1.25vw,21px)/1.2 Georgia,"Times New Roman",serif;
+  white-space:nowrap;
+  text-align:center;
+  pointer-events:none;
+  text-shadow:0 1px 8px rgba(0,0,0,.35);
+  transition:opacity .25s ease;
+}
+
 .hint{
   position:absolute;left:50%;bottom:3.5%;transform:translateX(-50%);
   z-index:7;color:rgba(255,255,255,.62);font:9px/1.2 Arial,sans-serif;
@@ -115,6 +131,8 @@ body.opening .hint{opacity:0}
     <img class="door" src="art-door.webp" alt="Art">
   </a>
 
+  <div class="tagline" id="tagline">Scegli il tuo mondo.</div>
+
   <div class="lang-switch" aria-label="Language">
     <button data-lang="it" aria-label="Italiano">IT</button>
     <button data-lang="en" aria-label="English">EN</button>
@@ -126,9 +144,9 @@ body.opening .hint{opacity:0}
 
 <script>
 const translations={
-  it:{hint:"TOCCA UNA PORTA"},
-  en:{hint:"TAP A DOOR"},
-  ru:{hint:"НАЖМИ НА ДВЕРЬ"}
+  it:{hint:"TOCCA UNA PORTA",tagline:"Scegli il tuo mondo."},
+  en:{hint:"TAP A DOOR",tagline:"Choose your world."},
+  ru:{hint:"НАЖМИ НА ДВЕРЬ",tagline:"Выбери свой мир."}
 };
 
 function setLang(lang){
@@ -136,6 +154,7 @@ function setLang(lang){
   localStorage.setItem("violaLang",lang);
   document.documentElement.lang=lang;
   document.getElementById("hint").textContent=translations[lang].hint;
+  document.getElementById("tagline").textContent=translations[lang].tagline;
   document.querySelectorAll(".lang-switch button").forEach(b=>{
     b.classList.toggle("active",b.dataset.lang===lang);
   });
