@@ -425,3 +425,531 @@
 </html>
 
 <!-- publish --
+
+<!DOCTYPE html>
+
+<html lang="en" translate="no">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="google" content="notranslate">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>VIOLA — Tattoo & Art</title>
+
+  <style>
+
+    * {
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+    }
+
+    html, body {
+
+      width: 100%;
+
+      min-height: 100%;
+
+      background: #070707;
+
+      color: white;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    body {
+
+      overflow: hidden;
+
+    }
+
+    .hero {
+
+      width: 100vw;
+
+      height: 100svh;
+
+      display: flex;
+
+      position: relative;
+
+      background: #070707;
+
+    }
+
+    /* ЛОГО */
+
+    .brand {
+
+      position: absolute;
+
+      top: 34px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      z-index: 20;
+
+      text-align: center;
+
+      white-space: nowrap;
+
+      pointer-events: none;
+
+    }
+
+    .brand h1 {
+
+      font-size: clamp(30px, 4.5vw, 64px);
+
+      font-weight: 300;
+
+      letter-spacing: 12px;
+
+      margin-left: 12px;
+
+    }
+
+    .brand p {
+
+      margin-top: 10px;
+
+      font-size: 10px;
+
+      letter-spacing: 4px;
+
+      opacity: .55;
+
+    }
+
+    /* ДВЕ ДВЕРИ */
+
+    .door {
+
+      width: 50%;
+
+      height: 100%;
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-decoration: none;
+
+      color: white;
+
+      overflow: hidden;
+
+      transition: width .7s ease;
+
+    }
+
+    .tattoo {
+
+      background:
+
+        radial-gradient(circle at 50% 45%, rgba(255,255,255,.09), transparent 32%),
+
+        linear-gradient(145deg, #181818 0%, #050505 72%);
+
+    }
+
+    .art {
+
+      background:
+
+        radial-gradient(circle at 50% 45%, rgba(255,150,180,.10), transparent 34%),
+
+        linear-gradient(145deg, #35151f 0%, #10080b 72%);
+
+    }
+
+    .door::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 24px;
+
+      border: 1px solid rgba(255,255,255,.12);
+
+      transition: .6s ease;
+
+    }
+
+    .door::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background: rgba(0,0,0,.10);
+
+      transition: .5s ease;
+
+    }
+
+    .door:hover::before {
+
+      inset: 16px;
+
+      border-color: rgba(255,255,255,.34);
+
+    }
+
+    .door:hover::after {
+
+      background: transparent;
+
+    }
+
+    /* ТЕКСТ */
+
+    .door-content {
+
+      z-index: 5;
+
+      position: relative;
+
+      text-align: center;
+
+      width: 90%;
+
+      transition: transform .6s ease;
+
+    }
+
+    .door:hover .door-content {
+
+      transform: translateY(-8px);
+
+    }
+
+    .number {
+
+      font-size: 10px;
+
+      letter-spacing: 5px;
+
+      opacity: .4;
+
+      margin-bottom: 22px;
+
+    }
+
+    .door h2 {
+
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: clamp(48px, 8vw, 105px);
+
+      font-weight: normal;
+
+      letter-spacing: 3px;
+
+      line-height: .95;
+
+      white-space: nowrap;
+
+    }
+
+    .subtitle {
+
+      margin-top: 24px;
+
+      font-size: 9px;
+
+      letter-spacing: 4px;
+
+      opacity: .55;
+
+      white-space: nowrap;
+
+    }
+
+    .enter {
+
+      display: inline-block;
+
+      margin-top: 34px;
+
+      padding: 13px 25px;
+
+      border: 1px solid rgba(255,255,255,.45);
+
+      font-size: 9px;
+
+      letter-spacing: 4px;
+
+      transition: .35s ease;
+
+    }
+
+    .door:hover .enter {
+
+      background: white;
+
+      color: #080808;
+
+    }
+
+    /* ЦЕНТРАЛЬНАЯ ЛИНИЯ */
+
+    .line {
+
+      position: absolute;
+
+      z-index: 10;
+
+      top: 0;
+
+      left: 50%;
+
+      width: 1px;
+
+      height: 100%;
+
+      background: rgba(255,255,255,.18);
+
+      pointer-events: none;
+
+    }
+
+    .bottom {
+
+      position: absolute;
+
+      left: 50%;
+
+      bottom: 18px;
+
+      transform: translateX(-50%);
+
+      z-index: 20;
+
+      font-size: 8px;
+
+      letter-spacing: 3px;
+
+      opacity: .35;
+
+      white-space: nowrap;
+
+    }
+
+    /* IPHONE / МОБИЛЬНАЯ ВЕРСИЯ */
+
+    @media (max-width: 700px) {
+
+      body {
+
+        overflow: auto;
+
+      }
+
+      .hero {
+
+        min-height: 100svh;
+
+        height: auto;
+
+        flex-direction: column;
+
+      }
+
+      .door {
+
+        width: 100%;
+
+        height: 50svh;
+
+        min-height: 360px;
+
+      }
+
+      .line {
+
+        left: 0;
+
+        top: 50%;
+
+        width: 100%;
+
+        height: 1px;
+
+      }
+
+      .brand {
+
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        background: #090909;
+
+        padding: 12px 18px;
+
+        border: 1px solid rgba(255,255,255,.15);
+
+      }
+
+      .brand h1 {
+
+        font-size: 20px;
+
+        letter-spacing: 7px;
+
+        margin-left: 7px;
+
+      }
+
+      .brand p {
+
+        display: none;
+
+      }
+
+      .door h2 {
+
+        font-size: clamp(48px, 16vw, 70px);
+
+      }
+
+      .subtitle {
+
+        font-size: 8px;
+
+        letter-spacing: 2.5px;
+
+        white-space: normal;
+
+      }
+
+      .number {
+
+        margin-bottom: 14px;
+
+      }
+
+      .enter {
+
+        margin-top: 19px;
+
+      }
+
+      .door::before {
+
+        inset: 14px;
+
+      }
+
+      .bottom {
+
+        display: none;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body translate="no">
+
+  <main class="hero">
+
+    <div class="brand notranslate">
+
+      <h1>VIOLA</h1>
+
+      <p>TATTOO ARTIST · PAINTER</p>
+
+    </div>
+
+    <a href="tattoo.html"
+
+       class="door tattoo notranslate"
+
+       translate="no">
+
+      <div class="door-content">
+
+        <div class="number">01</div>
+
+        <h2>TATTOO</h2>
+
+        <div class="subtitle">
+
+          REALISM · INK · CUSTOM DESIGN
+
+        </div>
+
+        <div class="enter">
+
+          ENTER
+
+        </div>
+
+      </div>
+
+    </a>
+
+    <a href="art.html"
+
+       class="door art notranslate"
+
+       translate="no">
+
+      <div class="door-content">
+
+        <div class="number">02</div>
+
+        <h2>ART</h2>
+
+        <div class="subtitle">
+
+          PAINTINGS · ORIGINAL WORKS
+
+        </div>
+
+        <div class="enter">
+
+          ENTER
+
+        </div>
+
+      </div>
+
+    </a>
+
+    <div class="line"></div>
+
+    <div class="bottom">
+
+      VIOLA © 2026
+
+    </div>
+
+  </main>
+
+</body>
+
+</html>
