@@ -1,955 +1,215 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>VIOLA — Tattoo & Art</title>
-
-  <style>
-
-    * {
-
-      margin: 0;
-
-      padding: 0;
-
-      box-sizing: border-box;
-
-    }
-
-    body {
-
-      background: #050505;
-
-      color: white;
-
-      font-family: Arial, Helvetica, sans-serif;
-
-      overflow: hidden;
-
-    }
-
-    .hero {
-
-      width: 100vw;
-
-      height: 100vh;
-
-      position: relative;
-
-      display: flex;
-
-    }
-
-    .logo {
-
-      position: absolute;
-
-      z-index: 20;
-
-      top: 35px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      text-align: center;
-
-      pointer-events: none;
-
-    }
-
-    .logo h1 {
-
-      font-size: clamp(38px, 6vw, 80px);
-
-      font-weight: 300;
-
-      letter-spacing: 14px;
-
-    }
-
-    .logo p {
-
-      margin-top: 8px;
-
-      font-size: 11px;
-
-      letter-spacing: 5px;
-
-      opacity: 0.7;
-
-    }
-
-    .side {
-
-      position: relative;
-
-      width: 50%;
-
-      height: 100%;
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
-      text-decoration: none;
-
-      color: white;
-
-      overflow: hidden;
-
-      transition: width 0.7s ease;
-
-    }
-
-    .side::before {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      transition: transform 0.8s ease, opacity 0.8s ease;
-
-    }
-
-    .tattoo::before {
-
-      background:
-
-        radial-gradient(circle at 50% 45%, rgba(255,255,255,.12), transparent 30%),
-
-        linear-gradient(135deg, #050505, #191919);
-
-    }
-
-    .art::before {
-
-      background:
-
-        radial-gradient(circle at 50% 45%, rgba(255,255,255,.16), transparent 28%),
-
-        linear-gradient(135deg, #1a0710, #080808);
-
-    }
-
-    .side::after {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background: rgba(0,0,0,.25);
-
-      transition: background .5s ease;
-
-    }
-
-    .content {
-
-      position: relative;
-
-      z-index: 5;
-
-      text-align: center;
-
-      transition: transform .6s ease;
-
-    }
-
-    .content .number {
-
-      font-size: 12px;
-
-      letter-spacing: 4px;
-
-      opacity: .5;
-
-      margin-bottom: 20px;
-
-    }
-
-    .content h2 {
-
-      font-family: Georgia, serif;
-
-      font-size: clamp(55px, 9vw, 130px);
-
-      font-weight: normal;
-
-      letter-spacing: 4px;
-
-    }
-
-    .content p {
-
-      margin-top: 22px;
-
-      letter-spacing: 4px;
-
-      font-size: 11px;
-
-      opacity: .65;
-
-    }
-
-    .enter {
-
-      display: inline-block;
-
-      margin-top: 35px;
-
-      border: 1px solid rgba(255,255,255,.5);
-
-      padding: 13px 25px;
-
-      font-size: 10px;
-
-      letter-spacing: 4px;
-
-      transition: .4s;
-
-    }
-
-    .divider {
-
-      position: absolute;
-
-      left: 50%;
-
-      top: 0;
-
-      width: 1px;
-
-      height: 100%;
-
-      background: rgba(255,255,255,.22);
-
-      z-index: 10;
-
-    }
-
-    .side:hover::before {
-
-      transform: scale(1.05);
-
-    }
-
-    .side:hover::after {
-
-      background: rgba(0,0,0,.05);
-
-    }
-
-    .side:hover .content {
-
-      transform: translateY(-10px);
-
-    }
-
-    .side:hover .enter {
-
-      background: white;
-
-      color: black;
-
-    }
-
-    .footer {
-
-      position: absolute;
-
-      z-index: 30;
-
-      bottom: 23px;
-
-      width: 100%;
-
-      text-align: center;
-
-      font-size: 9px;
-
-      letter-spacing: 3px;
-
-      opacity: .5;
-
-      pointer-events: none;
-
-    }
-
-    @media (max-width: 700px) {
-
-      .hero {
-
-        flex-direction: column;
-
-      }
-
-      .side {
-
-        width: 100%;
-
-        height: 50%;
-
-      }
-
-      .divider {
-
-        left: 0;
-
-        top: 50%;
-
-        width: 100%;
-
-        height: 1px;
-
-      }
-
-      .logo {
-
-        top: 50%;
-
-        transform: translate(-50%, -50%);
-
-        background: #050505;
-
-        padding: 12px 20px;
-
-      }
-
-      .logo h1 {
-
-        font-size: 22px;
-
-        letter-spacing: 8px;
-
-      }
-
-      .logo p {
-
-        display: none;
-
-      }
-
-      .content h2 {
-
-        font-size: 52px;
-
-      }
-
-      .content p {
-
-        margin-top: 10px;
-
-      }
-
-      .enter {
-
-        margin-top: 16px;
-
-      }
-
-    }
-
-  </style>
-
-</head>
-
-<body>
-
-  <main class="hero">
-
-    <div class="logo">
-
-      <h1>VIOLA</h1>
-
-      <p>TATTOO ARTIST · PAINTER</p>
-
-    </div>
-
-    <a class="side tattoo" href="tattoo.html">
-
-      <div class="content">
-
-        <div class="number">01</div>
-
-        <h2>TATTOO</h2>
-
-        <p>INK · REALISM · DESIGN</p>
-
-        <span class="enter">ENTER</span>
-
-      </div>
-
-    </a>
-
-    <a class="side art" href="art.html">
-
-      <div class="content">
-
-        <div class="number">02</div>
-
-        <h2>ART</h2>
-
-        <p>PAINTINGS · ORIGINAL WORKS</p>
-
-        <span class="enter">ENTER</span>
-
-      </div>
-
-    </a>
-
-    <div class="divider"></div>
-
-    <div class="footer">
-
-      VIOLA © 2026
-
-    </div>
-
-  </main>
-
-</body>
-
-</html>
-
-<!-- publish --
-
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en" translate="no">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta name="google" content="notranslate">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>VIOLA — Tattoo & Art</title>
-
-  <style>
-
-    * {
-
-      margin: 0;
-
-      padding: 0;
-
-      box-sizing: border-box;
-
-    }
-
-    html, body {
-
-      width: 100%;
-
-      min-height: 100%;
-
-      background: #070707;
-
-      color: white;
-
-      font-family: Arial, Helvetica, sans-serif;
-
-    }
-
-    body {
-
-      overflow: hidden;
-
-    }
-
-    .hero {
-
-      width: 100vw;
-
-      height: 100svh;
-
-      display: flex;
-
-      position: relative;
-
-      background: #070707;
-
-    }
-
-    /* ЛОГО */
-
-    .brand {
-
-      position: absolute;
-
-      top: 34px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      z-index: 20;
-
-      text-align: center;
-
-      white-space: nowrap;
-
-      pointer-events: none;
-
-    }
-
-    .brand h1 {
-
-      font-size: clamp(30px, 4.5vw, 64px);
-
-      font-weight: 300;
-
-      letter-spacing: 12px;
-
-      margin-left: 12px;
-
-    }
-
-    .brand p {
-
-      margin-top: 10px;
-
-      font-size: 10px;
-
-      letter-spacing: 4px;
-
-      opacity: .55;
-
-    }
-
-    /* ДВЕ ДВЕРИ */
-
-    .door {
-
-      width: 50%;
-
-      height: 100%;
-
-      position: relative;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      text-decoration: none;
-
-      color: white;
-
-      overflow: hidden;
-
-      transition: width .7s ease;
-
-    }
-
-    .tattoo {
-
-      background:
-
-        radial-gradient(circle at 50% 45%, rgba(255,255,255,.09), transparent 32%),
-
-        linear-gradient(145deg, #181818 0%, #050505 72%);
-
-    }
-
-    .art {
-
-      background:
-
-        radial-gradient(circle at 50% 45%, rgba(255,150,180,.10), transparent 34%),
-
-        linear-gradient(145deg, #35151f 0%, #10080b 72%);
-
-    }
-
-    .door::before {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 24px;
-
-      border: 1px solid rgba(255,255,255,.12);
-
-      transition: .6s ease;
-
-    }
-
-    .door::after {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background: rgba(0,0,0,.10);
-
-      transition: .5s ease;
-
-    }
-
-    .door:hover::before {
-
-      inset: 16px;
-
-      border-color: rgba(255,255,255,.34);
-
-    }
-
-    .door:hover::after {
-
-      background: transparent;
-
-    }
-
-    /* ТЕКСТ */
-
-    .door-content {
-
-      z-index: 5;
-
-      position: relative;
-
-      text-align: center;
-
-      width: 90%;
-
-      transition: transform .6s ease;
-
-    }
-
-    .door:hover .door-content {
-
-      transform: translateY(-8px);
-
-    }
-
-    .number {
-
-      font-size: 10px;
-
-      letter-spacing: 5px;
-
-      opacity: .4;
-
-      margin-bottom: 22px;
-
-    }
-
-    .door h2 {
-
-      font-family: Georgia, "Times New Roman", serif;
-
-      font-size: clamp(48px, 8vw, 105px);
-
-      font-weight: normal;
-
-      letter-spacing: 3px;
-
-      line-height: .95;
-
-      white-space: nowrap;
-
-    }
-
-    .subtitle {
-
-      margin-top: 24px;
-
-      font-size: 9px;
-
-      letter-spacing: 4px;
-
-      opacity: .55;
-
-      white-space: nowrap;
-
-    }
-
-    .enter {
-
-      display: inline-block;
-
-      margin-top: 34px;
-
-      padding: 13px 25px;
-
-      border: 1px solid rgba(255,255,255,.45);
-
-      font-size: 9px;
-
-      letter-spacing: 4px;
-
-      transition: .35s ease;
-
-    }
-
-    .door:hover .enter {
-
-      background: white;
-
-      color: #080808;
-
-    }
-
-    /* ЦЕНТРАЛЬНАЯ ЛИНИЯ */
-
-    .line {
-
-      position: absolute;
-
-      z-index: 10;
-
-      top: 0;
-
-      left: 50%;
-
-      width: 1px;
-
-      height: 100%;
-
-      background: rgba(255,255,255,.18);
-
-      pointer-events: none;
-
-    }
-
-    .bottom {
-
-      position: absolute;
-
-      left: 50%;
-
-      bottom: 18px;
-
-      transform: translateX(-50%);
-
-      z-index: 20;
-
-      font-size: 8px;
-
-      letter-spacing: 3px;
-
-      opacity: .35;
-
-      white-space: nowrap;
-
-    }
-
-    /* IPHONE / МОБИЛЬНАЯ ВЕРСИЯ */
-
-    @media (max-width: 700px) {
-
-      body {
-
-        overflow: auto;
-
-      }
-
-      .hero {
-
-        min-height: 100svh;
-
-        height: auto;
-
-        flex-direction: column;
-
-      }
-
-      .door {
-
-        width: 100%;
-
-        height: 50svh;
-
-        min-height: 360px;
-
-      }
-
-      .line {
-
-        left: 0;
-
-        top: 50%;
-
-        width: 100%;
-
-        height: 1px;
-
-      }
-
-      .brand {
-
-        top: 50%;
-
-        transform: translate(-50%, -50%);
-
-        background: #090909;
-
-        padding: 12px 18px;
-
-        border: 1px solid rgba(255,255,255,.15);
-
-      }
-
-      .brand h1 {
-
-        font-size: 20px;
-
-        letter-spacing: 7px;
-
-        margin-left: 7px;
-
-      }
-
-      .brand p {
-
-        display: none;
-
-      }
-
-      .door h2 {
-
-        font-size: clamp(48px, 16vw, 70px);
-
-      }
-
-      .subtitle {
-
-        font-size: 8px;
-
-        letter-spacing: 2.5px;
-
-        white-space: normal;
-
-      }
-
-      .number {
-
-        margin-bottom: 14px;
-
-      }
-
-      .enter {
-
-        margin-top: 19px;
-
-      }
-
-      .door::before {
-
-        inset: 14px;
-
-      }
-
-      .bottom {
-
-        display: none;
-
-      }
-
-    }
-
-  </style>
-
+<meta charset="utf-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Viola — Tattoo & Art</title>
+<style>
+:root{
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;background:#050505}
+body{
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  font-family:Georgia,"Times New Roman",serif;
+}
+.stage{
+  position:relative;
+  width:min(100vw,calc(100svh * 4 / 3));
+  height:min(100svh,calc(100vw * 3 / 4));
+  background:#050505;
+  overflow:hidden;
+  perspective:1800px;
+  transition:transform 1.15s var(--ease),filter 1.15s var(--ease);
+}
+.portal{
+  position:absolute;
+  top:15.2%;
+  width:26.25%;
+  height:62.6%;
+  overflow:hidden;
+  border-radius:50% 50% 0 0 / 22% 22% 0 0;
+  z-index:1;
+  background:#080808;
+}
+.portal.tattoo{left:15.2%;background-image:url("tattoo-room.webp")}
+.portal.art{left:58.6%;background-image:url("art-room.webp")}
+.portal{
+  background-size:cover;
+  background-position:center;
+  transform:scale(1.02);
+  transition:transform 1.2s var(--ease),filter .7s ease;
+}
+.portal::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.14),rgba(0,0,0,.04) 55%,rgba(0,0,0,.18));
+  pointer-events:none;
+}
+.frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  z-index:3;
+  pointer-events:none;
+}
+.door-link{
+  position:absolute;
+  top:15.2%;
+  width:26.25%;
+  height:62.6%;
+  z-index:4;
+  display:block;
+  outline:none;
+  perspective:1500px;
+  -webkit-tap-highlight-color:transparent;
+}
+.door-link.tattoo{left:15.2%}
+.door-link.art{left:58.6%}
+.door{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:fill;
+  transform-origin:100% 50%;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  transition:
+    transform .95s var(--ease),
+    filter .45s ease,
+    opacity .7s ease;
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.42));
+  will-change:transform;
+}
+.door-link::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50% 50% 0 0 / 22% 22% 0 0;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+  pointer-events:none;
+  transition:box-shadow .35s ease;
+}
+.door-link:hover .door,
+.door-link:focus-visible .door{
+  transform:rotateY(-10deg);
+  filter:drop-shadow(18px 20px 24px rgba(0,0,0,.52));
+}
+.door-link:hover::after,
+.door-link:focus-visible::after{
+  box-shadow:inset 0 0 34px rgba(255,255,255,.08);
+}
+.door-link.art:hover .door,
+.door-link.art:focus-visible .door{
+  transform:rotateY(-11deg);
+}
+.hint{
+  position:absolute;
+  left:50%;
+  bottom:3.6%;
+  transform:translateX(-50%);
+  z-index:6;
+  color:rgba(255,255,255,.62);
+  font:10px/1.2 Arial,sans-serif;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  pointer-events:none;
+  opacity:.78;
+  transition:opacity .35s ease;
+}
+body.opening .hint{opacity:0}
+body.opening .door-link{pointer-events:none}
+body.opening.tattoo-open .door-link.tattoo .door{
+  transform:rotateY(-78deg) translateZ(8px);
+  filter:drop-shadow(48px 24px 34px rgba(0,0,0,.72));
+}
+body.opening.art-open .door-link.art .door{
+  transform:rotateY(-78deg) translateZ(8px);
+  filter:drop-shadow(48px 24px 34px rgba(0,0,0,.72));
+}
+body.opening.tattoo-open .portal.tattoo,
+body.opening.art-open .portal.art{
+  transform:scale(1.08);
+}
+body.opening.tattoo-open .stage{transform:scale(1.035) translateX(1.5%)}
+body.opening.art-open .stage{transform:scale(1.035) translateX(-1.5%)}
+
+/* A subtle light spill when a door opens */
+.glow{
+  position:absolute;
+  top:15.2%;
+  width:26.25%;
+  height:62.6%;
+  border-radius:50% 50% 0 0 / 22% 22% 0 0;
+  z-index:2;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .85s ease;
+  mix-blend-mode:screen;
+}
+.glow.tattoo{left:15.2%;box-shadow:inset 0 0 70px rgba(255,28,112,.34)}
+.glow.art{left:58.6%;box-shadow:inset 0 0 70px rgba(255,214,188,.32)}
+body.opening.tattoo-open .glow.tattoo,
+body.opening.art-open .glow.art{opacity:1}
+
+@media (prefers-reduced-motion:reduce){
+  .door,.stage,.portal,.glow{transition:none!important}
+}
+@media (max-width:700px) and (orientation:portrait){
+  body{overflow:auto;min-height:100svh}
+  .stage{
+    width:100vw;
+    height:75vw;
+    min-height:310px;
+    margin:auto 0;
+  }
+  .hint{font-size:8px;bottom:2.2%;letter-spacing:.18em}
+}
+</style>
 </head>
+<body class="notranslate" translate="no">
+  <main class="stage" aria-label="Choose your world">
+    <div class="portal tattoo" aria-hidden="true"></div>
+    <div class="portal art" aria-hidden="true"></div>
 
-<body translate="no">
+    <div class="glow tattoo" aria-hidden="true"></div>
+    <div class="glow art" aria-hidden="true"></div>
 
-  <main class="hero">
+    <img class="frame" src="frame-overlay.webp" alt="">
 
-    <div class="brand notranslate">
-
-      <h1>VIOLA</h1>
-
-      <p>TATTOO ARTIST · PAINTER</p>
-
-    </div>
-
-    <a href="tattoo.html"
-
-       class="door tattoo notranslate"
-
-       translate="no">
-
-      <div class="door-content">
-
-        <div class="number">01</div>
-
-        <h2>TATTOO</h2>
-
-        <div class="subtitle">
-
-          REALISM · INK · CUSTOM DESIGN
-
-        </div>
-
-        <div class="enter">
-
-          ENTER
-
-        </div>
-
-      </div>
-
+    <a class="door-link tattoo" href="tattoo.html" aria-label="Enter Tattoo">
+      <img class="door" src="tattoo-door.webp" alt="Tattoo">
     </a>
 
-    <a href="art.html"
-
-       class="door art notranslate"
-
-       translate="no">
-
-      <div class="door-content">
-
-        <div class="number">02</div>
-
-        <h2>ART</h2>
-
-        <div class="subtitle">
-
-          PAINTINGS · ORIGINAL WORKS
-
-        </div>
-
-        <div class="enter">
-
-          ENTER
-
-        </div>
-
-      </div>
-
+    <a class="door-link art" href="art.html" aria-label="Enter Art">
+      <img class="door" src="art-door.webp" alt="Art">
     </a>
 
-    <div class="line"></div>
-
-    <div class="bottom">
-
-      VIOLA © 2026
-
-    </div>
-
+    <div class="hint">Tap a door</div>
   </main>
 
-</body>
+<script>
+document.querySelectorAll(".door-link").forEach(link=>{
+  link.addEventListener("click",e=>{
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    e.preventDefault();
+    if(document.body.classList.contains("opening")) return;
 
+    const isTattoo=link.classList.contains("tattoo");
+    document.body.classList.add("opening", isTattoo ? "tattoo-open" : "art-open");
+
+    window.setTimeout(()=>{
+      window.location.href=link.getAttribute("href");
+    },1050);
+  });
+});
+</script>
+</body>
 </html>
